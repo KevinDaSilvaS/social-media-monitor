@@ -3,6 +3,7 @@ import { Mapper } from "../mapper";
 import { Batch, Result } from "../types";
 import { TwitterClient } from "src/clients/twitter-client";
 import { Source } from "src/clients/client-enum";
+import { v4 as uuidv4 } from 'uuid';
 
 export class TwitterMapper implements Mapper {
     data: TwitterApiResponse;
@@ -18,13 +19,14 @@ export class TwitterMapper implements Mapper {
             total: this.data.meta.result_count,
             lastClientIdentifier: this.data.meta.oldest_id,
             source: Source.Twitter,
-            hashtag: this.hashtag
+            hashtag: this.hashtag,
+            batchId: uuidv4()
         }
 
         const registers = this.data.data.map(tweet => ({
             timestamp: tweet.created_at,
             data: tweet.text,
-            batchId: 'oi'
+            batchId: batch.batchId
         }))
 
         return {
