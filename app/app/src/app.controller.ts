@@ -1,4 +1,4 @@
-import { Controller, HttpCode, Param, Post, Query } from '@nestjs/common';
+import { Controller, HttpCode, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller('monitor')
@@ -8,7 +8,7 @@ export class AppController {
   @Post()
   @HttpCode(204)
   async createJobForHashtag(@Query() query) {
-    console.log(query)
-    return await this.appService.createJobForHashtag(`%23${query.hashtag}`);
+    return await this.appService.createJobForHashtag(
+      `%23${query.hashtag}`, query.filter);
   }
 }
