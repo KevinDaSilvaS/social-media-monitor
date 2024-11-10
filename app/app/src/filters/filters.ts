@@ -46,7 +46,7 @@ export function median(batchs: any[]): number {
 }
 
 export function isAnomally(expected: number, received: number): boolean {
-    const PERCENTAGE_WANTED = 25
+    const PERCENTAGE_WANTED = parseInt(process.env.PERCENTAGE_WANTED) ?? 25
     const addedPercentageOverExpected = PERCENTAGE_WANTED/100*expected+expected
     if (received > addedPercentageOverExpected) {
         return true
