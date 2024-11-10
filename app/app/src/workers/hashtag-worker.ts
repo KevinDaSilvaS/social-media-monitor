@@ -14,7 +14,9 @@ const worker = new Worker('hashtag', async (job: Job) => {
     const mapper = picker[job.data.source]
     logger.log(`Getting data from ${job.data.source} client`)
     await mapper.getAndSetData(job.data)
+
     const { batch, registers } = mapper.mapData()
+
     const filter = filters[job.data.filter]
     logger.log('Detecting anomaly')
 
