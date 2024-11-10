@@ -8,10 +8,7 @@ import { Source } from './clients/client-enum';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.listen(process.env.PORT ?? 3000);
-  (await new HashtagQueue().startQueue()).addJob({ 
-    hashtag: '#tbt', 
-    source: Source.Twitter })
-
-  console.log(worker)
+  await new HashtagQueue().startQueue()
+  await worker
 }
 bootstrap();
