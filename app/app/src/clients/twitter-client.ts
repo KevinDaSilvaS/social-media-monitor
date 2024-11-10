@@ -5,8 +5,8 @@ export class TwitterClient {
     /**
      * fetchData
      */
-    public async fetchData(hashtag): Promise<TwitterApiResponse> {
-        const { data } = await axios.get(`http://localhost:3001/2/tweets/search/recent?query=${hashtag}`)
+    public async fetchData(hashtag: string): Promise<TwitterApiResponse> {
+        const { data } = await axios.get(`${process.env.TWITTER_API_URL}/2/tweets/search/recent?query=${hashtag}`)
         return data
     }
 }
