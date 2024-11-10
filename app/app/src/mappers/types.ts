@@ -4,7 +4,8 @@ export type Batch = {
     total: number
     lastClientIdentifier: number
     source: Source,
-    hashtag: string
+    hashtag: string,
+    batchId: string
 }
 
 export type Register = {
