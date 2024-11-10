@@ -6,8 +6,8 @@ class HashtagQueue {
     private queueName = 'hashtag'
     public async startQueue () {
         this.queue = new Queue(this.queueName, { connection: {
-            host: process.env.REDIS_HOST ?? "localhost",
-            port: parseInt(process.env.REDIS_PORT) ?? 6379
+            host: "localhost",
+            port: parseInt(process.env.REDIS_PORT) || 6379
         }})
 
         return this
@@ -19,9 +19,10 @@ class HashtagQueue {
             job,
             {
                 repeat: {
-                  every: parseInt(process.env.REPEAT_INTERVAL) ?? 5000
+                  every: parseInt(process.env.REPEAT_INTERVAL) || 5000
                 },
             })
+        console.log(job)
     }
 }
 
