@@ -1,13 +1,14 @@
 import { Queue } from 'bullmq';
 import { HashtagJob } from './types';
+import { envs } from 'src/env';
 
 class HashtagQueue {
     private queue: Queue
     private queueName = 'hashtag'
     public async startQueue () {
         this.queue = new Queue(this.queueName, { connection: {
-            host: "localhost",
-            port: parseInt(process.env.REDIS_PORT) || 6379
+            host: envs.redisHost,
+            port: envs.redisPort
         }})
 
         return this
@@ -19,10 +20,9 @@ class HashtagQueue {
             job,
             {
                 repeat: {
-                  every: parseInt(process.env.REPEAT_INTERVAL) || 5000
+                  every: envs.repeatInterval
                 },
             })
-        console.log(job)
     }
 }
 

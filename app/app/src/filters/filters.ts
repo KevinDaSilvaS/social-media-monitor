@@ -1,3 +1,5 @@
+import { envs } from "src/env"
+
 export function mode(batchs: any[]): number {
     if (batchs.length <= 0)
         return 0
@@ -46,7 +48,7 @@ export function median(batchs: any[]): number {
 }
 
 export function isAnomally(expected: number, received: number): boolean {
-    const PERCENTAGE_WANTED = parseInt(process.env.PERCENTAGE_WANTED) || 50
+    const PERCENTAGE_WANTED = envs.percentageWanted
     const addedPercentageOverExpected = PERCENTAGE_WANTED/100*expected+expected
     if (received > addedPercentageOverExpected) {
         return true

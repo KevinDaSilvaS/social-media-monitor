@@ -6,6 +6,7 @@ import { isAnomally } from 'src/filters/filters'
 import { BatchModel } from 'src/schema/batch';
 import { RegisterModel } from 'src/schema/register';
 import { alert } from '../alerts/hashtag-webhook-alert'
+import { envs } from 'src/env';
 
 const logger = new Logger('Hashtag Worker')
 
@@ -41,8 +42,8 @@ const worker = new Worker('hashtag', async (job: Job) => {
     logger.error(error.message)
   }
 }, { connection: {
-    host: "localhost",
-    port: parseInt(process.env.REDIS_PORT) || 6379
+    host: envs.redisHost,
+    port: envs.redisPort
   }})
 
 export = worker
