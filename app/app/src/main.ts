@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import HashtagQueue from './queues/hashtag-queue';
 import worker from './workers/hashtag-worker'
+import { Source } from './clients/client-enum';
 
 
 async function bootstrap() {
@@ -9,7 +10,7 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3000);
   (await new HashtagQueue().startQueue()).addJob({ 
     hashtag: '#tbt', 
-    source: 'Twitter' })
+    source: Source.Twitter })
 
   console.log(worker)
 }
