@@ -5,7 +5,7 @@ const worker = new Worker('hashtag', async (job: Job) => {
   console.log('JOB:: ', job.data)
   try {
     const mapper = picker[job.data.source]
-    await mapper.getData(job.data)
+    await mapper.getAndSetData(job.data)
     /* const { batch, registers } =  */mapper.mapData()
     //console.log(batch, registers)
   } catch (error) {
