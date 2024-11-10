@@ -5,6 +5,7 @@ import filters from '../filters/filter-picker'
 import { isAnomally } from 'src/filters/filters'
 import { BatchModel } from 'src/schema/batch';
 import { RegisterModel } from 'src/schema/register';
+import { alert } from '../alerts/hashtag-webhook-alert'
 
 const logger = new Logger('Hashtag Worker')
 
@@ -23,11 +24,12 @@ const worker = new Worker('hashtag', async (job: Job) => {
     const batches = await BatchModel.find({ 
       hashtag: job.data.hashtag, 
       source: job.data.source  
-    }).limit(100).exec()
+    }).limit(1000).exec()
 
     const expected = filter(batches)
     if (expected > 0 && isAnomally(expected, batch.total)) {
       logger.warn(`Anomaly detected for batch id: ${batch.batchId}`)
+      await alert(batch)
     }
 
     logger.log('Saving batch')
