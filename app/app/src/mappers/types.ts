@@ -3,18 +3,18 @@ import { Source } from "src/clients/client-enum"
 export type Batch = {
     total: number
     lastClientIdentifier: number
-    source: Source,
-    hashtag: string,
+    source: Source
+    hashtag: string
     batchId: string
 }
 
 export type Register = {
     timestamp: Date
-    data: string,
+    data: string
     batchId: string
 }
 
 export type Result = {
-    batch: Batch,
+    batch: Batch
     registers: Register[]
 }

@@ -1,9 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import HashtagQueue from './queues/hashtag-queue';
-import worker from './workers/hashtag-worker'
-import { Source } from './clients/client-enum';
-
+import worker from './workers/hashtag-worker';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
