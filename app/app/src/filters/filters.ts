@@ -1,4 +1,4 @@
-import { envs } from "src/env"
+import { envs } from "../env"
 
 export function mode(batchs: any[]): number {
     if (batchs.length <= 0)
